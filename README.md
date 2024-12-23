@@ -1,4 +1,4 @@
-# eleventy-base-blog v9
+# eleventy-js-blog vNext
 
 A starter repository showing how to build a blog with the [Eleventy](https://www.11ty.dev/) site generator (using the [v3.0 release](https://github.com/11ty/eleventy/releases/tag/v3.0.0)).
 
@@ -16,7 +16,7 @@ cd my-blog-name
 2. Clone this Repository
 
 ```
-git clone https://github.com/11ty/eleventy-base-blog.git .
+git clone https://github.com/hiimmrdave/11ty-js-blog.git .
 ```
 
 _Optional:_ Review `eleventy.config.js` and `_data/metadata.js` to configure the site’s options and data.
@@ -91,10 +91,10 @@ Or you can run [debug mode](https://www.11ty.dev/docs/debugging/) to see all the
 Deploy this Eleventy site in just a few clicks on these services:
 
 - Read more about [Deploying an Eleventy project](https://www.11ty.dev/docs/deployment/) to the web.
-- [Deploy this to **Netlify**](https://app.netlify.com/start/deploy?repository=https://github.com/11ty/eleventy-base-blog)
-- [Deploy this to **Vercel**](https://vercel.com/import/project?template=11ty%2Feleventy-base-blog)
+- [Deploy this to **Netlify**](https://app.netlify.com/start/deploy?repository=https://github.com/hiimmrdave/eleventy-js-blog)
+- [Deploy this to **Vercel**](https://vercel.com/import/project?template=hiimmrdave%2Feleventy-js-blog)
 - Look in `.github/workflows/gh-pages.yml.sample` for information on Deploying to **GitHub Pages**.
-- [Try it out on **Stackblitz**](https://stackblitz.com/github/11ty/eleventy-base-blog)
+- [Try it out on **Stackblitz**](https://stackblitz.com/github/hiimmrdave/eleventy-js-blog)
 
 ### Implementation Notes
 
@@ -113,5 +113,5 @@ Deploy this Eleventy site in just a few clicks on these services:
 
 If your site enforces a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (as public-facing sites should), you have a few choices (pick one):
 
-1. In `base.njk`, remove `<style>{% getBundle "css" %}</style>` and uncomment `<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">`
+1. In `base.webc`, remove `<style webc:keep @text="getBundle('css')"></style>` and uncomment `<link webc:keep rel="stylesheet" :src="getBundleFileUrl('css')" />`
 2. Configure the server with the CSP directive `style-src: 'unsafe-inline'` (less secure).
