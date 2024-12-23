@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html :lang="language">
+	<head>
+		<script webc:setup>
+			const { runMode } = eleventy.env,
+				{ generator } = eleventy,
+				{ language } = metadata,
+				navigation = eleventyNavigation(collections.all);
+		</script>
+		<title @text="title || metadata.title"></title>
+		<!--- Uncomment this if you’d like folks to know that you used Eleventy to build your site! --->
+		<!--- <meta name="generator" :content="generator"> --->
+		<meta name="description" :content="description || metadata.description" />
+		<link
+			rel="alternate"
+			href="feed/feed.xml"
+			type="application/atom+xml"
+			:title="title"
+		/>
+		<link
+			rel="alternate"
+			href="/feed/feed.json"
+			type="application/json"
+			:title="title"
+		/>
+		<!---
+		Plain-text bundles are provided via the `eleventy-plugin-bundle` plugin:
+		1. CSS:
+			* Add to a per-page bundle using:
+				`<style></style>` or `<link rel="stylesheet" src="SOMETHING.css" />`
+			* Retrieve bundle content using:
+				`<style webc:keep @text="getBundle('css')"></style>` or
+				`<link webc:keep rel="stylesheet" :src="getBundleFileUrl('css')" />`
+		2. Or for JavaScript:
+			* Add to a per-page bundle using
+				`<script></script>` or
+				`<script src="MYFILE.js"></script>`
+			* Retrieve via:
+				`<script webc:keep @text="getBundle('js')"></script>` or
+				`<script webc:keep :src="getBundleFileUrl('js')"></script>`
+		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
+		--->
+		<!--- Add an arbitrary string to the bundle --->
+		<style>
+			/* This is an arbitrary CSS string added to the bundle */
+		</style>
+		<!--- Add the contents of a file to the bundle --->
+		<link rel="stylesheet" href="../../public/css/index.css" />
+		<!--- Or you can add from node_modules
+		<link
+			rel="stylesheet"
+			href="../../node_modules/prismjs/themes/prism-okaidia.css"
+		/> --->
+		<!--- 
+    Render the CSS bundle using inlined CSS
+    (for the fastest site performance in production) --->
+		<style webc:keep @text="getBundle('css')"></style>
+		<!--- Renders the CSS bundle using a separate file,
+    if you can't set CSP directive style-src: 'unsafe-inline':
+		<link webc:keep rel="stylesheet" :src="getBundleFileUrl('css')" /> 
+    --->
+		<!--- Add the heading-anchors web component to the JavaScript bundle --->
+		<script src="../../node_modules/@zachleat/heading-anchors/heading-anchors.js"></script>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+		<header>
+			<a href="/" class="home-link" @text="metadata.title"></a>
+			<!--- Read more about `eleventy-navigation` at
+			https://www.11ty.dev/docs/plugins/navigation/ --->
+			<nav>
+				<h2 class="visually-hidden">Top level navigation menu</h2>
+				<ul class="nav">
+					<script webc:type="js">
+						navigation
+							.map(
+								(navigationItem) => `
+          <li class="nav-item">
+            <a href="${navigationItem.url}"${
+									navigationItem.url == this.page.url
+										? ` aria-current="page"`
+										: ``
+								}>${navigationItem.title}</a>
+          </li>`
+							)
+							.join("");
+					</script>
+				</ul>
+			</nav>
+		</header>
+		<main id="skip">
+			<heading-anchors>
+				<template @html="content" webc:nokeep></template>
+			</heading-anchors>
+		</main>
+		<footer>
+			<p>
+				<em
+					>Built with <a href="https://www.11ty.dev/" @text="generator"></a
+				></em>
+			</p>
+		</footer>
+		<script webc:keep @text="getBundle('js')"></script>
+	</body>
+</html>

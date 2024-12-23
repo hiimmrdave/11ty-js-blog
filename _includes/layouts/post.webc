@@ -1,0 +1,35 @@
+---
+layout: layouts/base.webc
+---
+
+<!---
+Only include the syntax highlighter CSS on blog posts, included with the CSS per-page bundle
+--->
+<link
+	rel="stylesheet"
+	href="../../node_modules/prismjs/themes/prism-okaidia.css"
+/>
+<link rel="stylesheet" href="../../public/css/prism-diff.css" />
+
+<h1 @text="title"></h1>
+<ul class="post-metadata">
+	<li>
+		<time
+			:datetime="page.date.toISOString()"
+			@text="page.date.toLocaleDateString( 'en-GB' , { dateStyle: 'long' } )"
+		></time>
+	</li>
+	<script webc:type="js">
+		filterTagList(tags)
+			.map((tag) => {
+				return `<li>
+					<a href="/tags/${slugify(tag)}" class="post-tag">${tag}</a>
+				</li>`;
+			})
+			.join("\n");
+	</script>
+</ul>
+
+<template webc:nokeep @html="content"></template>
+
+<nextprev :collection="collections.posts" :post="this.page"></nextprev>

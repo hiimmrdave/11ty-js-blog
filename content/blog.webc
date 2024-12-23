@@ -1,0 +1,14 @@
+---js
+const eleventyNavigation = {
+	key: "Archive",
+	order: 2
+};
+---
+
+<h1>Archive</h1>
+
+<postlist
+	:postlist="collections.posts"
+	:poststoshow="Infinity"
+	:postcount="collections.posts.length"
+></postlist>
