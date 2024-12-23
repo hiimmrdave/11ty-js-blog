@@ -16,7 +16,7 @@ cd my-blog-name
 2. Clone this Repository
 
 ```
-git clone https://github.com/hiimmrdave/11ty-js-blog.git .
+git clone https://github.com/hiimmrdave/eleventy-js-blog.git .
 ```
 
 _Optional:_ Review `eleventy.config.js` and `_data/metadata.js` to configure the site’s options and data.
