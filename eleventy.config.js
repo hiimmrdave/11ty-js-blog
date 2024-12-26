@@ -125,7 +125,7 @@ export const config = {
 	templateFormats: ["md", "njk", "html", "liquid", "11ty.js", "webc"],
 
 	// Pre-process *.md files with: (default: `liquid`)
-	markdownTemplateEngine: "njk",
+	markdownTemplateEngine: "webc",
 
 	// Pre-process *.html files with: (default: `liquid`)
 	htmlTemplateEngine: "webc",
