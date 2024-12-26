@@ -36,8 +36,8 @@
 				`<script></script>` or
 				`<script src="MYFILE.js"></script>`
 			* Retrieve via:
-				`<script webc:keep @text="getBundle('js')"></script>` or
-				`<script webc:keep :src="getBundleFileUrl('js')"></script>`
+				`<script type="module" webc:keep @text="getBundle('js')"></script>` or
+				`<script type="module" webc:keep :src="getBundleFileUrl('js')"></script>`
 		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
 		--->
 		<!--- Add an arbitrary string to the bundle --->
@@ -100,6 +100,6 @@
 				></em>
 			</p>
 		</footer>
-		<script webc:keep @text="getBundle('js')"></script>
+		<script type="module" webc:keep @text="getBundle('js')"></script>
 	</body>
 </html>
